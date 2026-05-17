@@ -3,9 +3,11 @@ import SwiftUI
 @main
 struct ImprovedRightClickApp: App {
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        MenuBarExtra {
+            MenuBarView()
+        } label: {
+            Image(systemName: "doc.badge.plus")
         }
-        .windowStyle(.hiddenTitleBar)
+        .menuBarExtraStyle(.window)
     }
 }

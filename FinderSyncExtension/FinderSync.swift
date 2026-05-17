@@ -3,46 +3,61 @@ import FinderSync
 
 class FinderSync: FIFinderSync {
 
+    // Both must be captured inside menu(for:) while the controller context is valid.
+    // By the time @objc actions fire, targetedURL() may already return nil.
+    private var cachedTargetURL: URL?
+    private var pendingConfigs: [Int: FileTypeConfig] = [:]
+
     override init() {
         super.init()
-        // Watch the entire filesystem so the menu appears in any Finder window.
         FIFinderSyncController.default().directoryURLs = [URL(fileURLWithPath: "/")]
     }
 
-    // MARK: - Context Menu
+    // MARK: - Menu
 
     override func menu(for menuKind: FIMenuKind) -> NSMenu? {
         guard menuKind == .contextualMenuForItems || menuKind == .contextualMenuForContainer else {
             return nil
         }
 
+        // Capture now — unavailable once the menu closes and an action fires.
+        cachedTargetURL = FIFinderSyncController.default().targetedURL()
+        pendingConfigs.removeAll()
+
+        let enabledTypes = FileTypeStorage.load().filter { $0.isEnabled }
         let root = NSMenu(title: "")
 
-        // "New File" with a submenu of file types
-        let newFileItem = NSMenuItem(title: "New File", action: nil, keyEquivalent: "")
-        newFileItem.image = icon("doc.badge.plus")
-        let submenu = NSMenu(title: "New File")
-        for template in FileTemplate.all {
-            let item = NSMenuItem(
-                title: template.displayName,
-                action: #selector(createFile(_:)),
-                keyEquivalent: ""
-            )
-            item.representedObject = template
-            item.image = icon(template.systemIcon)
-            item.target = self
-            submenu.addItem(item)
-        }
-        newFileItem.submenu = submenu
-        root.addItem(newFileItem)
+        if !enabledTypes.isEmpty {
+            let newFileItem = NSMenuItem(title: "New File", action: nil, keyEquivalent: "")
+            newFileItem.image = icon("doc.badge.plus")
+            let submenu = NSMenu(title: "New File")
 
-        // "New Folder Here" as a direct action
+            for (index, config) in enabledTypes.enumerated() {
+                // Store by index — avoids Swift struct / AnyObject bridging issues
+                // that make `representedObject as? FileTypeConfig` silently fail.
+                pendingConfigs[index] = config
+
+                let item = NSMenuItem(
+                    title: config.displayName,
+                    action: #selector(createFile(_:)),
+                    keyEquivalent: ""
+                )
+                item.tag    = index
+                item.image  = icon(config.systemIcon)
+                item.target = self
+                submenu.addItem(item)
+            }
+
+            newFileItem.submenu = submenu
+            root.addItem(newFileItem)
+        }
+
         let folderItem = NSMenuItem(
             title: "New Folder Here",
             action: #selector(createFolder(_:)),
             keyEquivalent: ""
         )
-        folderItem.image = icon("folder.badge.plus")
+        folderItem.image  = icon("folder.badge.plus")
         folderItem.target = self
         root.addItem(folderItem)
 
@@ -52,58 +67,63 @@ class FinderSync: FIFinderSync {
     // MARK: - Actions
 
     @objc private func createFile(_ sender: NSMenuItem) {
-        guard
-            let template = sender.representedObject as? FileTemplate,
-            let targetDir = targetDirectory()
-        else { return }
+        guard let config    = pendingConfigs[sender.tag],
+              let targetDir = resolveTargetDir() else { return }
 
-        let name = uniqueName(base: "untitled", ext: template.fileExtension, in: targetDir)
+        let name    = uniqueName(base: "untitled", ext: config.fileExtension, in: targetDir)
         let fileURL = targetDir.appendingPathComponent(name)
 
         do {
-            let data = try template.makeContent()
+            let data = try makeContent(for: config)
             try data.write(to: fileURL, options: .atomic)
-            reveal(fileURL, in: targetDir)
+            NSWorkspace.shared.selectFile(fileURL.path, inFileViewerRootedAtPath: targetDir.path)
         } catch {
-            presentError(error)
+            showError("Could not create \"\(name)\"", detail: error.localizedDescription)
         }
     }
 
     @objc private func createFolder(_ sender: NSMenuItem) {
-        guard let targetDir = targetDirectory() else { return }
+        guard let targetDir = resolveTargetDir() else { return }
 
-        let name = uniqueName(base: "untitled folder", ext: nil, in: targetDir)
+        let name      = uniqueName(base: "untitled folder", ext: nil, in: targetDir)
         let folderURL = targetDir.appendingPathComponent(name)
 
         do {
             try FileManager.default.createDirectory(at: folderURL, withIntermediateDirectories: false)
-            reveal(folderURL, in: targetDir)
+            NSWorkspace.shared.selectFile(folderURL.path, inFileViewerRootedAtPath: targetDir.path)
         } catch {
-            presentError(error)
+            showError("Could not create folder", detail: error.localizedDescription)
         }
     }
 
     // MARK: - Helpers
 
-    private func targetDirectory() -> URL? {
-        // targetedURL() returns the Finder folder that was right-clicked.
-        let target = FIFinderSyncController.default().targetedURL()
-        return target
+    private func resolveTargetDir() -> URL? {
+        // Use the URL we captured in menu(for:); fall back to a live call just in case.
+        cachedTargetURL ?? FIFinderSyncController.default().targetedURL()
     }
 
-    private func reveal(_ url: URL, in directory: URL) {
-        NSWorkspace.shared.selectFile(url.path, inFileViewerRootedAtPath: directory.path)
-    }
-
-    private func presentError(_ error: Error) {
-        DispatchQueue.main.async {
-            let alert = NSAlert(error: error)
-            alert.runModal()
+    private func makeContent(for config: FileTypeConfig) throws -> Data {
+        switch config.fileExtension.lowercased() {
+        case "docx": return try OfficeTemplates.docx()
+        case "pptx": return try OfficeTemplates.pptx()
+        case "xlsx": return try OfficeTemplates.xlsx()
+        default:     return Data(config.initialContent.utf8)
         }
     }
 
     private func icon(_ name: String) -> NSImage? {
         NSImage(systemSymbolName: name, accessibilityDescription: nil)
+    }
+
+    private func showError(_ message: String, detail: String) {
+        DispatchQueue.main.async {
+            let alert = NSAlert()
+            alert.messageText     = message
+            alert.informativeText = detail
+            alert.alertStyle      = .warning
+            alert.runModal()
+        }
     }
 }
 
@@ -111,18 +131,13 @@ class FinderSync: FIFinderSync {
 
 func uniqueName(base: String, ext: String?, in directory: URL) -> String {
     let fm = FileManager.default
-
     func candidate(_ suffix: String) -> String {
         ext.map { "\(base)\(suffix).\($0)" } ?? "\(base)\(suffix)"
     }
-
     if !fm.fileExists(atPath: directory.appendingPathComponent(candidate("")).path) {
         return candidate("")
     }
-
     var i = 2
-    while fm.fileExists(atPath: directory.appendingPathComponent(candidate(" \(i)")).path) {
-        i += 1
-    }
+    while fm.fileExists(atPath: directory.appendingPathComponent(candidate(" \(i)")).path) { i += 1 }
     return candidate(" \(i)")
 }
