@@ -5,7 +5,11 @@
       "Bash(codesign *)",
       "Bash(pkill -x ImprovedRightCl)",
       "Bash(open ~/Library/Developer/Xcode/DerivedData/ImprovedRightClick-czuhuycejmjulceaqfsnnbfqpuus/Build/Products/Debug/ImprovedRightClick.app)",
-      "Bash(xcodebuild -project ImprovedRightClick.xcodeproj -scheme ImprovedRightClick -configuration Debug build)"
+      "Bash(xcodebuild -project ImprovedRightClick.xcodeproj -scheme ImprovedRightClick -configuration Debug build)",
+      "Bash(log show *)",
+      "Bash(defaults read *)",
+      "Bash(mdfind \"kMDItemCFBundleIdentifier == 'com.improvedrightclick.app'\")",
+      "Bash(~/Library/Developer/Xcode/DerivedData/ImprovedRightClick-czuhuycejmjulceaqfsnnbfqpuus/Build/Products/Debug/ImprovedRightClick.app/Contents/MacOS/ImprovedRightClick)"
     ]
   }
 }

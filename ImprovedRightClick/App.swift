@@ -2,12 +2,10 @@ import SwiftUI
 
 @main
 struct ImprovedRightClickApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var delegate
+
     var body: some Scene {
-        MenuBarExtra {
-            MenuBarView()
-        } label: {
-            Image(systemName: "doc.badge.plus")
-        }
-        .menuBarExtraStyle(.window)
+        // No windows — the entire UI lives in the status-bar popover.
+        Settings { EmptyView() }
     }
 }
