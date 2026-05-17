@@ -12,6 +12,7 @@
 		5CD43F50EF2EFB42920EFC2C /* FinderSyncExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BE8D41F1380E07EC0A6D975C /* FinderSyncExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		65D5DD2C0DC5A81A07B6051F /* MinimalZIPWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65D8548DC26E8745C8775C1 /* MinimalZIPWriter.swift */; };
 		760C60500CDF1992674DDC3A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A88A1C26A0D98E72E7DB0B0 /* ContentView.swift */; };
+		824A095266CAD420EF41FA2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4342CA56399C25E34CF45576 /* Assets.xcassets */; };
 		85F21E8F7CD49F7849EDD4C7 /* FileTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EB76EBDBD8C6259250F82D /* FileTemplate.swift */; };
 		B4AEBE282498506425518A43 /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9A9932A91CC6F775FBDA07 /* FinderSync.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		2A88A1C26A0D98E72E7DB0B0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4342CA56399C25E34CF45576 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C2AE2637D253207559E8001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A2E39D9EAE014840D79A5F32 /* ImprovedRightClick.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ImprovedRightClick.entitlements; sourceTree = "<group>"; };
 		AF9DAF57B25E362363C54D70 /* FinderSyncExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinderSyncExtension.entitlements; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				F14C9FF48248D049F30CCA32 /* App.swift */,
+				4342CA56399C25E34CF45576 /* Assets.xcassets */,
 				2A88A1C26A0D98E72E7DB0B0 /* ContentView.swift */,
 				A2E39D9EAE014840D79A5F32 /* ImprovedRightClick.entitlements */,
 				7C2AE2637D253207559E8001 /* Info.plist */,
@@ -106,6 +109,7 @@
 			buildConfigurationList = B9E1F863E27DFB242357DE88 /* Build configuration list for PBXNativeTarget "ImprovedRightClick" */;
 			buildPhases = (
 				167CBF36B2BF8D7E45814EC9 /* Sources */,
+				AC8D8645B6C5C465F4D364B4 /* Resources */,
 				0059457C86AFCFCE44165854 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -173,6 +177,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AC8D8645B6C5C465F4D364B4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				824A095266CAD420EF41FA2E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		167CBF36B2BF8D7E45814EC9 /* Sources */ = {

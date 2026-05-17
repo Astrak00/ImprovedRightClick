@@ -25,6 +25,8 @@ targets:
     platform: macOS
     sources:
       - path: ImprovedRightClick
+    resources:
+      - path: ImprovedRightClick/Assets.xcassets
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.improvedrightclick.app
