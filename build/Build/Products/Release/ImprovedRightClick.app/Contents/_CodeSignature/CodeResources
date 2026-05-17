@@ -3,7 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>files</key>
-	<dict/>
+	<dict>
+		<key>Resources/AppIcon.icns</key>
+		<data>
+		Rg8+5+mluOnwjgkS0U+aqetfppo=
+		</data>
+		<key>Resources/Assets.car</key>
+		<data>
+		QrIM7mY1KDVvDJ72jR6uWWIy94U=
+		</data>
+	</dict>
 	<key>files2</key>
 	<dict>
 		<key>PlugIns/FinderSyncExtension.appex</key>
@@ -14,6 +23,20 @@
 			</data>
 			<key>requirement</key>
 			<string>identifier "com.improvedrightclick.app.FinderSyncExtension" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: iedualanav@gmail.com (NK36NGGB2V)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+		</dict>
+		<key>Resources/AppIcon.icns</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			iBAfBCAJJywji2XygoqMawHB3UNkR5oVtGbtHuTskEc=
+			</data>
+		</dict>
+		<key>Resources/Assets.car</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			OlNPqFaHef4m1yFmYhOqB8qOgt8vcOc1gpAF6yKtaSY=
+			</data>
 		</dict>
 		<key>embedded.provisionprofile</key>
 		<dict>

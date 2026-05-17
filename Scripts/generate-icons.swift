@@ -4,49 +4,57 @@ import AppKit
 import Foundation
 
 let outDir = "ImprovedRightClick/Assets.xcassets/AppIcon.appiconset"
+
+// Exact pixel sizes required by macOS app icon spec
 let pixelSizes = [16, 32, 64, 128, 256, 512, 1024]
 
-// Light-themed icon:
-//   • White rounded-square background
-//   • Dark blue symbol (consistent in both light & dark system modes)
+func renderIcon(pixels: Int) -> Data {
+    let size = CGFloat(pixels)
 
-func renderIcon(pixelSize: Int) -> Data {
-    let pt  = CGFloat(pixelSize)
-    let img = NSImage(size: NSSize(width: pt, height: pt))
-    img.lockFocus()
+    // CGBitmapContext renders at exact pixel counts, ignoring display scale
+    let ctx = CGContext(
+        data: nil,
+        width: pixels,
+        height: pixels,
+        bitsPerComponent: 8,
+        bytesPerRow: 0,
+        space: CGColorSpaceCreateDeviceRGB(),
+        bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+    )!
+    ctx.translateBy(x: 0, y: size)
+    ctx.scaleBy(x: 1, y: -1)
 
-    // ── Background: white rounded square ─────────────────────────
-    let pad    = pt * 0.04
-    let rect   = NSRect(x: pad, y: pad, width: pt - pad * 2, height: pt - pad * 2)
-    let radius = pt * 0.22          // matches macOS icon rounding
+    let ns = NSGraphicsContext(cgContext: ctx, flipped: true)
+    NSGraphicsContext.saveGraphicsState()
+    NSGraphicsContext.current = ns
 
-    // Soft drop shadow (skip at tiny sizes — too small to matter)
-    if pt >= 64 {
+    // ── Background: white rounded square ──────────────────────────
+    let pad    = size * 0.04
+    let rect   = NSRect(x: pad, y: pad, width: size - pad * 2, height: size - pad * 2)
+    let radius = size * 0.22
+
+    if pixels >= 64 {
         let shadow = NSShadow()
-        shadow.shadowColor  = NSColor(calibratedWhite: 0, alpha: 0.18)
-        shadow.shadowOffset = NSSize(width: 0, height: -pt * 0.015)
-        shadow.shadowBlurRadius = pt * 0.04
+        shadow.shadowColor       = NSColor(calibratedWhite: 0, alpha: 0.18)
+        shadow.shadowOffset      = NSSize(width: 0, height: -size * 0.015)
+        shadow.shadowBlurRadius  = size * 0.04
         shadow.set()
     }
 
     NSColor.white.setFill()
     NSBezierPath(roundedRect: rect, xRadius: radius, yRadius: radius).fill()
-
-    // Reset shadow so it doesn't bleed onto the symbol
     NSShadow().set()
 
-    // ── Symbol ────────────────────────────────────────────────────
-    let symbolPt = pt * 0.54
+    // ── Symbol ─────────────────────────────────────────────────────
+    let symbolPt = size * 0.54
     let cfg = NSImage.SymbolConfiguration(pointSize: symbolPt, weight: .regular)
     guard let raw = NSImage(systemSymbolName: "doc.badge.plus", accessibilityDescription: nil)?
             .withSymbolConfiguration(cfg) else {
-        img.unlockFocus()
+        NSGraphicsContext.restoreGraphicsState()
         fatalError("SF Symbol not found")
     }
 
-    // Dark-blue tint — visible on the white background in any system mode
     let symbolColor = NSColor(calibratedRed: 0.13, green: 0.33, blue: 0.73, alpha: 1)
-
     let tinted = NSImage(size: raw.size)
     tinted.lockFocus()
     symbolColor.setFill()
@@ -57,41 +65,28 @@ func renderIcon(pixelSize: Int) -> Data {
              fraction: 1.0)
     tinted.unlockFocus()
 
-    let sw = tinted.size.width
-    let sh = tinted.size.height
-    let ox = (pt - sw) / 2
-    let oy = (pt - sh) / 2
+    let ox = (size - tinted.size.width)  / 2
+    let oy = (size - tinted.size.height) / 2
     tinted.draw(at: NSPoint(x: ox, y: oy),
                 from: NSRect(origin: .zero, size: tinted.size),
                 operation: .sourceOver,
                 fraction: 1.0)
 
-    img.unlockFocus()
+    NSGraphicsContext.restoreGraphicsState()
 
-    guard
-        let tiff   = img.tiffRepresentation,
-        let bitmap = NSBitmapImageRep(data: tiff),
-        let png    = bitmap.representation(using: .png, properties: [:])
-    else { fatalError("PNG conversion failed for size \(pixelSize)") }
-
-    return png
+    let cgImage = ctx.makeImage()!
+    let rep = NSBitmapImageRep(cgImage: cgImage)
+    rep.size = NSSize(width: pixels, height: pixels)
+    return rep.representation(using: .png, properties: [:])!
 }
 
-// MARK: - Write files
-// One icon used for both light and dark system appearances (light-themed always)
-
+// Write each pixel-exact file (same image used for light and dark)
 for px in pixelSizes {
-    let data = renderIcon(pixelSize: px)
-
-    // Write the shared file once, referenced by both light and dark entries in Contents.json
-    let path = "\(outDir)/icon_\(px).png"
-    try! data.write(to: URL(fileURLWithPath: path))
-    print("✓ icon_\(px).png")
-
-    // Overwrite the dark variant with the same image
-    let darkPath = "\(outDir)/icon_dark_\(px).png"
-    try! data.write(to: URL(fileURLWithPath: darkPath))
-    print("✓ icon_dark_\(px).png (same, light-themed)")
+    let data = renderIcon(pixels: px)
+    try! data.write(to: URL(fileURLWithPath: "\(outDir)/icon_\(px).png"))
+    print("✓ icon_\(px).png  (\(px)×\(px) px)")
+    try! data.write(to: URL(fileURLWithPath: "\(outDir)/icon_dark_\(px).png"))
+    print("✓ icon_dark_\(px).png")
 }
 
 print("\nDone — \(pixelSizes.count * 2) files written to \(outDir)")
