@@ -90,7 +90,11 @@ class FinderSync: FIFinderSync {
     }
 
     private func icon(_ name: String) -> NSImage? {
-        NSImage(systemSymbolName: name, accessibilityDescription: nil)
+        guard let base = NSImage(systemSymbolName: name, accessibilityDescription: nil) else { return nil }
+        let config = NSImage.SymbolConfiguration(paletteColors: [.white])
+        let tinted = base.withSymbolConfiguration(config) ?? base
+        tinted.isTemplate = false
+        return tinted
     }
 
     private func showError(_ message: String, detail: String) {
