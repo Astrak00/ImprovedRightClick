@@ -1,0 +1,4 @@
+Target dependency graph (2 targets)
+Target 'ImprovedRightClick' in project 'ImprovedRightClick'
+➜ Explicit dependency on target 'FinderSyncExtension' in project 'ImprovedRightClick'
+Target 'FinderSyncExtension' in project 'ImprovedRightClick' (no dependencies)

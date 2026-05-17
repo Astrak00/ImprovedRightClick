@@ -4,28 +4,69 @@ import SwiftUI
 
 struct MenuBarView: View {
     @ObservedObject var store: FileTypeStore
+    @ObservedObject var extensionStatus: ExtensionStatus
     @State private var screen: Screen = .list
 
     enum Screen { case list, add }
 
     var body: some View {
-        ZStack {
-            if screen == .list {
-                ListView(store: store, onAdd: { screen = .add })
-                    .transition(.move(edge: .leading))
-            } else {
-                AddScreen(
-                    onAdd: { config in
-                        store.add(config)
-                        screen = .list
-                    },
-                    onBack: { screen = .list }
-                )
-                .transition(.move(edge: .trailing))
+        VStack(spacing: 0) {
+            if !extensionStatus.isActive {
+                ExtensionBanner(onEnable: extensionStatus.openExtensionSettings)
             }
+
+            ZStack {
+                if screen == .list {
+                    ListView(store: store, onAdd: { screen = .add })
+                        .transition(.move(edge: .leading))
+                } else {
+                    AddScreen(
+                        onAdd: { config in
+                            store.add(config)
+                            screen = .list
+                        },
+                        onBack: { screen = .list }
+                    )
+                    .transition(.move(edge: .trailing))
+                }
+            }
+            .animation(.easeInOut(duration: 0.2), value: screen)
         }
         .frame(width: 320)
-        .animation(.easeInOut(duration: 0.2), value: screen)
+    }
+}
+
+// MARK: - Extension not-active banner
+
+private struct ExtensionBanner: View {
+    let onEnable: () -> Void
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 13))
+                .foregroundColor(.orange)
+
+            VStack(alignment: .leading, spacing: 1) {
+                Text("Finder extension not active")
+                    .font(.system(size: 12, weight: .semibold))
+                Text("Enable it in System Settings to use right-click.")
+                    .font(.system(size: 10))
+                    .foregroundColor(.secondary)
+            }
+
+            Spacer()
+
+            Button("Enable") { onEnable() }
+                .font(.system(size: 11, weight: .medium))
+                .buttonStyle(.borderedProminent)
+                .controlSize(.small)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
+        .background(Color.orange.opacity(0.08))
+
+        Divider()
     }
 }
 

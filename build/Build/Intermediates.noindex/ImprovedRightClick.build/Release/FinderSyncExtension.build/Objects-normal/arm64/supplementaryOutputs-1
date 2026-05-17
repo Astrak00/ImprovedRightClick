@@ -1,0 +1,12 @@
+{
+  "/Users/edu/Documents/Personal/proyectos/improved-right-click/Shared/FileTypeConfig.swift" : {
+    "abi-baseline-json" : "/Users/edu/Documents/Personal/proyectos/improved-right-click/build/Build/Intermediates.noindex/ImprovedRightClick.build/Release/FinderSyncExtension.build/Objects-normal/arm64/FinderSyncExtension.abi.json",
+    "const-values" : "/Users/edu/Documents/Personal/proyectos/improved-right-click/build/Build/Intermediates.noindex/ImprovedRightClick.build/Release/FinderSyncExtension.build/Objects-normal/arm64/FinderSyncExtension-primary.swiftconstvalues",
+    "dependencies" : "/Users/edu/Documents/Personal/proyectos/improved-right-click/build/Build/Intermediates.noindex/ImprovedRightClick.build/Release/FinderSyncExtension.build/Objects-normal/arm64/FinderSyncExtension-primary.d",
+    "diagnostics" : "/Users/edu/Documents/Personal/proyectos/improved-right-click/build/Build/Intermediates.noindex/ImprovedRightClick.build/Release/FinderSyncExtension.build/Objects-normal/arm64/FinderSyncExtension-primary.dia",
+    "objc-header" : "/Users/edu/Documents/Personal/proyectos/improved-right-click/build/Build/Intermediates.noindex/ImprovedRightClick.build/Release/FinderSyncExtension.build/Objects-normal/arm64/FinderSyncExtension-Swift.h",
+    "swiftdoc" : "/Users/edu/Documents/Personal/proyectos/improved-right-click/build/Build/Intermediates.noindex/ImprovedRightClick.build/Release/FinderSyncExtension.build/Objects-normal/arm64/FinderSyncExtension.swiftdoc",
+    "swiftmodule" : "/Users/edu/Documents/Personal/proyectos/improved-right-click/build/Build/Intermediates.noindex/ImprovedRightClick.build/Release/FinderSyncExtension.build/Objects-normal/arm64/FinderSyncExtension.swiftmodule",
+    "swiftsourceinfo" : "/Users/edu/Documents/Personal/proyectos/improved-right-click/build/Build/Intermediates.noindex/ImprovedRightClick.build/Release/FinderSyncExtension.build/Objects-normal/arm64/FinderSyncExtension.swiftsourceinfo"
+  }
+}

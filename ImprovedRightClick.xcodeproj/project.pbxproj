@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0FD520FCA9C670581374DF73 /* FileTypeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B79C626712C8F54B2C518A /* FileTypeConfig.swift */; };
 		1540761DFA035A89EBF34092 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14C9FF48248D049F30CCA32 /* App.swift */; };
+		15BF55F6B0289A638E3250E9 /* ExtensionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A511E688238A6DBA0845F3 /* ExtensionStatus.swift */; };
 		528319711AA5E32657A787EE /* OfficeTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94036E82297FFD97AB5562C /* OfficeTemplates.swift */; };
 		5CD43F50EF2EFB42920EFC2C /* FinderSyncExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BE8D41F1380E07EC0A6D975C /* FinderSyncExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		65D5DD2C0DC5A81A07B6051F /* MinimalZIPWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65D8548DC26E8745C8775C1 /* MinimalZIPWriter.swift */; };
@@ -54,6 +55,7 @@
 		A2E39D9EAE014840D79A5F32 /* ImprovedRightClick.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ImprovedRightClick.entitlements; sourceTree = "<group>"; };
 		AF9DAF57B25E362363C54D70 /* FinderSyncExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinderSyncExtension.entitlements; sourceTree = "<group>"; };
 		BE8D41F1380E07EC0A6D975C /* FinderSyncExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FinderSyncExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8A511E688238A6DBA0845F3 /* ExtensionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionStatus.swift; sourceTree = "<group>"; };
 		C94036E82297FFD97AB5562C /* OfficeTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeTemplates.swift; sourceTree = "<group>"; };
 		CA59D0E787A0E8BA278515F9 /* FileTypeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypeStore.swift; sourceTree = "<group>"; };
 		D638A8B79B8D3238BF396774 /* ImprovedRightClick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImprovedRightClick.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +113,7 @@
 				F14C9FF48248D049F30CCA32 /* App.swift */,
 				FFA496FF272BCAC51BCAE4E6 /* AppDelegate.swift */,
 				4342CA56399C25E34CF45576 /* Assets.xcassets */,
+				C8A511E688238A6DBA0845F3 /* ExtensionStatus.swift */,
 				CA59D0E787A0E8BA278515F9 /* FileTypeStore.swift */,
 				A2E39D9EAE014840D79A5F32 /* ImprovedRightClick.entitlements */,
 				7C2AE2637D253207559E8001 /* Info.plist */,
@@ -217,6 +220,7 @@
 				AF1B97262F445CD12E57F719 /* AddFileTypeView.swift in Sources */,
 				1540761DFA035A89EBF34092 /* App.swift in Sources */,
 				7C21A9C59C79DEA7465B8CC2 /* AppDelegate.swift in Sources */,
+				15BF55F6B0289A638E3250E9 /* ExtensionStatus.swift in Sources */,
 				0FD520FCA9C670581374DF73 /* FileTypeConfig.swift in Sources */,
 				B329D3C49414285ED8D9F571 /* FileTypeStore.swift in Sources */,
 				89EF4237C991600A0E1930C9 /* MenuBarView.swift in Sources */,

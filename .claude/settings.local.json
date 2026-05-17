@@ -9,7 +9,12 @@
       "Bash(log show *)",
       "Bash(defaults read *)",
       "Bash(mdfind \"kMDItemCFBundleIdentifier == 'com.improvedrightclick.app'\")",
-      "Bash(~/Library/Developer/Xcode/DerivedData/ImprovedRightClick-czuhuycejmjulceaqfsnnbfqpuus/Build/Products/Debug/ImprovedRightClick.app/Contents/MacOS/ImprovedRightClick)"
+      "Bash(~/Library/Developer/Xcode/DerivedData/ImprovedRightClick-czuhuycejmjulceaqfsnnbfqpuus/Build/Products/Debug/ImprovedRightClick.app/Contents/MacOS/ImprovedRightClick)",
+      "Bash(swift *)",
+      "Bash(make install *)",
+      "Bash(cp -R \"build/Build/Products/Release/ImprovedRightClick.app\" \"/Applications/ImprovedRightClick.app\")",
+      "Bash(open \"/Applications/ImprovedRightClick.app\")",
+      "Bash(xcodebuild -project ImprovedRightClick.xcodeproj -scheme ImprovedRightClick -configuration Release -derivedDataPath build build)"
     ]
   }
 }

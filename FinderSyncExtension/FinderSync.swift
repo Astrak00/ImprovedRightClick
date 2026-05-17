@@ -52,15 +52,6 @@ class FinderSync: FIFinderSync {
             root.addItem(newFileItem)
         }
 
-        let folderItem = NSMenuItem(
-            title: "New Folder Here",
-            action: #selector(createFolder(_:)),
-            keyEquivalent: ""
-        )
-        folderItem.image  = icon("folder.badge.plus")
-        folderItem.target = self
-        root.addItem(folderItem)
-
         return root
     }
 
@@ -82,21 +73,7 @@ class FinderSync: FIFinderSync {
         }
     }
 
-    @objc private func createFolder(_ sender: NSMenuItem) {
-        guard let targetDir = resolveTargetDir() else { return }
-
-        let name      = uniqueName(base: "untitled folder", ext: nil, in: targetDir)
-        let folderURL = targetDir.appendingPathComponent(name)
-
-        do {
-            try FileManager.default.createDirectory(at: folderURL, withIntermediateDirectories: false)
-            NSWorkspace.shared.selectFile(folderURL.path, inFileViewerRootedAtPath: targetDir.path)
-        } catch {
-            showError("Could not create folder", detail: error.localizedDescription)
-        }
-    }
-
-    // MARK: - Helpers
+// MARK: - Helpers
 
     private func resolveTargetDir() -> URL? {
         // Use the URL we captured in menu(for:); fall back to a live call just in case.

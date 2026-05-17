@@ -5,29 +5,29 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private var statusItem: NSStatusItem!
     private var popover: NSPopover!
-    private var store = FileTypeStore()
+    private var store           = FileTypeStore()
+    private var extensionStatus = ExtensionStatus()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        // Hide from Dock and app switcher — status-bar-only app.
         NSApp.setActivationPolicy(.accessory)
 
-        // ── Status item (the icon in the menu bar) ───────────────
+        // ── Status item ───────────────────────────────────────────
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         if let button = statusItem.button {
             button.image = NSImage(systemSymbolName: "doc.badge.plus",
                                    accessibilityDescription: "File Templates")
-            button.image?.isTemplate = true      // adapts to light/dark menu bar
+            button.image?.isTemplate = true
             button.action = #selector(togglePopover(_:))
-            button.target  = self
+            button.target = self
         }
 
         // ── Popover ───────────────────────────────────────────────
-        let content = MenuBarView(store: store)
-        let hosting = NSHostingController(rootView: content)
+        let root = MenuBarView(store: store, extensionStatus: extensionStatus)
+        let hosting = NSHostingController(rootView: root)
 
         popover = NSPopover()
         popover.contentViewController = hosting
-        popover.behavior = .transient   // closes on click-outside automatically
+        popover.behavior = .transient
         popover.animates = true
     }
 
