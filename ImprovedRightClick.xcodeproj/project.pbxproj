@@ -1,0 +1,445 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1540761DFA035A89EBF34092 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14C9FF48248D049F30CCA32 /* App.swift */; };
+		528319711AA5E32657A787EE /* OfficeTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94036E82297FFD97AB5562C /* OfficeTemplates.swift */; };
+		5CD43F50EF2EFB42920EFC2C /* FinderSyncExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BE8D41F1380E07EC0A6D975C /* FinderSyncExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		65D5DD2C0DC5A81A07B6051F /* MinimalZIPWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65D8548DC26E8745C8775C1 /* MinimalZIPWriter.swift */; };
+		760C60500CDF1992674DDC3A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A88A1C26A0D98E72E7DB0B0 /* ContentView.swift */; };
+		85F21E8F7CD49F7849EDD4C7 /* FileTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EB76EBDBD8C6259250F82D /* FileTemplate.swift */; };
+		B4AEBE282498506425518A43 /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9A9932A91CC6F775FBDA07 /* FinderSync.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7CA838B925AF858F39BCF6A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AF5156A1A306AD4A3EE20D07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 95B47F765527DEB3D2B6E4C4;
+			remoteInfo = FinderSyncExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0059457C86AFCFCE44165854 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5CD43F50EF2EFB42920EFC2C /* FinderSyncExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2A88A1C26A0D98E72E7DB0B0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7C2AE2637D253207559E8001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A2E39D9EAE014840D79A5F32 /* ImprovedRightClick.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ImprovedRightClick.entitlements; sourceTree = "<group>"; };
+		AF9DAF57B25E362363C54D70 /* FinderSyncExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinderSyncExtension.entitlements; sourceTree = "<group>"; };
+		B6EB76EBDBD8C6259250F82D /* FileTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTemplate.swift; sourceTree = "<group>"; };
+		BE8D41F1380E07EC0A6D975C /* FinderSyncExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FinderSyncExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C94036E82297FFD97AB5562C /* OfficeTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeTemplates.swift; sourceTree = "<group>"; };
+		D638A8B79B8D3238BF396774 /* ImprovedRightClick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImprovedRightClick.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB9A9932A91CC6F775FBDA07 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
+		E65D8548DC26E8745C8775C1 /* MinimalZIPWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalZIPWriter.swift; sourceTree = "<group>"; };
+		F14C9FF48248D049F30CCA32 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		F9B1337F45EB5FF35D983581 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		3552ED50F7DD28793136B1AA /* FinderSyncExtension */ = {
+			isa = PBXGroup;
+			children = (
+				B6EB76EBDBD8C6259250F82D /* FileTemplate.swift */,
+				DB9A9932A91CC6F775FBDA07 /* FinderSync.swift */,
+				AF9DAF57B25E362363C54D70 /* FinderSyncExtension.entitlements */,
+				F9B1337F45EB5FF35D983581 /* Info.plist */,
+				E65D8548DC26E8745C8775C1 /* MinimalZIPWriter.swift */,
+				C94036E82297FFD97AB5562C /* OfficeTemplates.swift */,
+			);
+			path = FinderSyncExtension;
+			sourceTree = "<group>";
+		};
+		45758655560CD33C4F22B46C = {
+			isa = PBXGroup;
+			children = (
+				3552ED50F7DD28793136B1AA /* FinderSyncExtension */,
+				78FD5502FF63F7E2EFDDA23F /* ImprovedRightClick */,
+				591F6BE0285F15E615EB049F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		591F6BE0285F15E615EB049F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE8D41F1380E07EC0A6D975C /* FinderSyncExtension.appex */,
+				D638A8B79B8D3238BF396774 /* ImprovedRightClick.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		78FD5502FF63F7E2EFDDA23F /* ImprovedRightClick */ = {
+			isa = PBXGroup;
+			children = (
+				F14C9FF48248D049F30CCA32 /* App.swift */,
+				2A88A1C26A0D98E72E7DB0B0 /* ContentView.swift */,
+				A2E39D9EAE014840D79A5F32 /* ImprovedRightClick.entitlements */,
+				7C2AE2637D253207559E8001 /* Info.plist */,
+			);
+			path = ImprovedRightClick;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		13F58649E36123FD98F7636E /* ImprovedRightClick */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B9E1F863E27DFB242357DE88 /* Build configuration list for PBXNativeTarget "ImprovedRightClick" */;
+			buildPhases = (
+				167CBF36B2BF8D7E45814EC9 /* Sources */,
+				0059457C86AFCFCE44165854 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ABBAD2A2B129945108DD0350 /* PBXTargetDependency */,
+			);
+			name = ImprovedRightClick;
+			packageProductDependencies = (
+			);
+			productName = ImprovedRightClick;
+			productReference = D638A8B79B8D3238BF396774 /* ImprovedRightClick.app */;
+			productType = "com.apple.product-type.application";
+		};
+		95B47F765527DEB3D2B6E4C4 /* FinderSyncExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CB0DA51ABE68D77E2907DD5 /* Build configuration list for PBXNativeTarget "FinderSyncExtension" */;
+			buildPhases = (
+				5B1662677D4A89376A400E62 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FinderSyncExtension;
+			packageProductDependencies = (
+			);
+			productName = FinderSyncExtension;
+			productReference = BE8D41F1380E07EC0A6D975C /* FinderSyncExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AF5156A1A306AD4A3EE20D07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					13F58649E36123FD98F7636E = {
+						ProvisioningStyle = Automatic;
+					};
+					95B47F765527DEB3D2B6E4C4 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A042F573611E0FF5CE033981 /* Build configuration list for PBXProject "ImprovedRightClick" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 45758655560CD33C4F22B46C;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 591F6BE0285F15E615EB049F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				95B47F765527DEB3D2B6E4C4 /* FinderSyncExtension */,
+				13F58649E36123FD98F7636E /* ImprovedRightClick */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		167CBF36B2BF8D7E45814EC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1540761DFA035A89EBF34092 /* App.swift in Sources */,
+				760C60500CDF1992674DDC3A /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B1662677D4A89376A400E62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85F21E8F7CD49F7849EDD4C7 /* FileTemplate.swift in Sources */,
+				B4AEBE282498506425518A43 /* FinderSync.swift in Sources */,
+				65D5DD2C0DC5A81A07B6051F /* MinimalZIPWriter.swift in Sources */,
+				528319711AA5E32657A787EE /* OfficeTemplates.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ABBAD2A2B129945108DD0350 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 95B47F765527DEB3D2B6E4C4 /* FinderSyncExtension */;
+			targetProxy = 7CA838B925AF858F39BCF6A8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0C65A0680D0B891BED1A08DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ImprovedRightClick/ImprovedRightClick.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = XP64L9JZD6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = ImprovedRightClick/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.improvedrightclick.app;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		0E08A081DEE7FA4CAE6F74B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = NK36NGGB2V;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		2695358EE653853229464B9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = NK36NGGB2V;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		84DD6E66775B945CAA1FB264 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ImprovedRightClick/ImprovedRightClick.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = XP64L9JZD6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = ImprovedRightClick/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.improvedrightclick.app;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		99E72D9AEF19DED91B3D56E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = FinderSyncExtension/FinderSyncExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = XP64L9JZD6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = FinderSyncExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.improvedrightclick.app.FinderSyncExtension;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FED21773FD6AC8851E8A956F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = FinderSyncExtension/FinderSyncExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = XP64L9JZD6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = FinderSyncExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.improvedrightclick.app.FinderSyncExtension;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7CB0DA51ABE68D77E2907DD5 /* Build configuration list for PBXNativeTarget "FinderSyncExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FED21773FD6AC8851E8A956F /* Debug */,
+				99E72D9AEF19DED91B3D56E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A042F573611E0FF5CE033981 /* Build configuration list for PBXProject "ImprovedRightClick" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E08A081DEE7FA4CAE6F74B1 /* Debug */,
+				2695358EE653853229464B9C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B9E1F863E27DFB242357DE88 /* Build configuration list for PBXNativeTarget "ImprovedRightClick" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C65A0680D0B891BED1A08DF /* Debug */,
+				84DD6E66775B945CAA1FB264 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AF5156A1A306AD4A3EE20D07 /* Project object */;
+}
