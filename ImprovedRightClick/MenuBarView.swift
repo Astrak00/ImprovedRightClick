@@ -3,7 +3,7 @@ import SwiftUI
 // MARK: - Root
 
 struct MenuBarView: View {
-    @StateObject private var store = FileTypeStore()
+    @ObservedObject var store: FileTypeStore
     @State private var screen: Screen = .list
 
     enum Screen { case list, add }
