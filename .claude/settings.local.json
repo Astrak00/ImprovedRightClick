@@ -14,7 +14,10 @@
       "Bash(make install *)",
       "Bash(cp -R \"build/Build/Products/Release/ImprovedRightClick.app\" \"/Applications/ImprovedRightClick.app\")",
       "Bash(open \"/Applications/ImprovedRightClick.app\")",
-      "Bash(xcodebuild -project ImprovedRightClick.xcodeproj -scheme ImprovedRightClick -configuration Release -derivedDataPath build build)"
+      "Bash(xcodebuild -project ImprovedRightClick.xcodeproj -scheme ImprovedRightClick -configuration Release -derivedDataPath build build)",
+      "Bash(xcrun notarytool *)",
+      "Bash(brew info *)",
+      "Bash(chmod +x *)"
     ]
   }
 }

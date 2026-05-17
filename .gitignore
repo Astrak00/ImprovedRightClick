@@ -1,0 +1,21 @@
+# Xcode
+*.xcodeproj/xcuserdata/
+*.xcworkspace/
+DerivedData/
+build/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Signing artifacts
+*.p12
+*.mobileprovision
+notarize-creds.env
+
+# Generated
+ImprovedRightClick.xcodeproj
