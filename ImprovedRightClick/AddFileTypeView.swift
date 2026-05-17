@@ -1,218 +1,206 @@
 import SwiftUI
 
-struct AddFileTypeView: View {
+// MARK: - Add screen (no ScrollView — fits in the popover directly)
+
+struct AddScreen: View {
     let onAdd: (FileTypeConfig) -> Void
-    @Environment(\.dismiss) private var dismiss
+    let onBack: () -> Void
 
-    @State private var displayName = ""
-    @State private var fileExtension = ""
-    @State private var selectedIcon = "doc.text"
-    @State private var initialContent = ""
-    @State private var showInitialContent = false
+    @State private var name      = ""
+    @State private var ext       = ""
+    @State private var icon      = "doc.text"
+    @State private var content   = ""
+    @State private var showContent = false
 
-    private let icons: [String] = [
-        "doc.text", "doc.richtext", "doc.fill", "doc.badge.plus",
-        "globe", "paintpalette", "curlybraces", "chevron.left.forwardslash.chevron.right",
-        "terminal", "swift", "cpu", "puzzlepiece",
-        "tablecells", "rectangle.on.rectangle", "photo", "music.note",
-    ]
-
-    private var canAdd: Bool {
-        !displayName.trimmingCharacters(in: .whitespaces).isEmpty &&
-        !fileExtension.trimmingCharacters(in: .whitespaces).isEmpty
+    private var canSubmit: Bool {
+        !name.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !ext.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
     var body: some View {
         VStack(spacing: 0) {
-            sheetHeader
+            header
             Divider()
-            ScrollView {
-                VStack(alignment: .leading, spacing: 18) {
-                    nameAndExtensionRow
-                    iconPicker
-                    initialContentSection
-                }
-                .padding(16)
-            }
+            form
             Divider()
-            sheetFooter
+            footer
         }
-        .frame(width: 340)
+        .frame(width: 320)
     }
 
-    // MARK: - Header
+    // MARK: Header
 
-    private var sheetHeader: some View {
+    private var header: some View {
         HStack {
-            Text("Add File Type")
-                .font(.system(size: 14, weight: .semibold))
-            Spacer()
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "xmark.circle.fill")
-                    .font(.system(size: 18))
-                    .symbolRenderingMode(.hierarchical)
-                    .foregroundColor(.secondary)
+            Button(action: onBack) {
+                HStack(spacing: 3) {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 11, weight: .semibold))
+                    Text("Back")
+                        .font(.system(size: 12))
+                }
+                .foregroundColor(.secondary)
             }
             .buttonStyle(.plain)
+
+            Spacer()
+
+            Text("New File Type")
+                .font(.system(size: 13, weight: .semibold))
+
+            Spacer()
+
+            // balance spacer
+            Text("Back")
+                .font(.system(size: 12))
+                .opacity(0)
         }
-        .padding(.horizontal, 16)
-        .padding(.top, 16)
-        .padding(.bottom, 12)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 11)
     }
 
-    // MARK: - Name + Extension
+    // MARK: Form
 
-    private var nameAndExtensionRow: some View {
-        HStack(alignment: .top, spacing: 10) {
-            VStack(alignment: .leading, spacing: 5) {
-                fieldLabel("Name")
-                TextField("e.g. TypeScript File", text: $displayName)
-                    .textFieldStyle(.roundedBorder)
+    private var form: some View {
+        VStack(alignment: .leading, spacing: 14) {
+
+            // Name + Extension in one row
+            HStack(alignment: .top, spacing: 10) {
+                field(label: "Name") {
+                    TextField("e.g. TypeScript File", text: $name)
+                        .textFieldStyle(.roundedBorder)
+                        .font(.system(size: 12))
+                }
+
+                field(label: "Extension") {
+                    HStack(spacing: 0) {
+                        Text(".")
+                            .foregroundColor(.secondary)
+                            .padding(.leading, 7)
+                            .font(.system(size: 13))
+                        TextField("ts", text: $ext)
+                            .font(.system(size: 13, design: .monospaced))
+                            .textFieldStyle(.plain)
+                            .padding(.vertical, 4)
+                            .padding(.trailing, 6)
+                            .onChange(of: ext) { v in
+                                if v.hasPrefix(".") { ext = String(v.dropFirst()) }
+                            }
+                    }
+                    .frame(height: 22)
+                    .background(Color(NSColor.textBackgroundColor))
+                    .overlay(RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color(NSColor.separatorColor), lineWidth: 1))
+                    .cornerRadius(5)
+                }
+                .frame(width: 78)
             }
 
-            VStack(alignment: .leading, spacing: 5) {
-                fieldLabel("Extension")
-                extensionField
+            // Icon grid
+            field(label: "Icon") {
+                iconGrid
             }
-            .frame(width: 84)
-        }
-    }
 
-    private var extensionField: some View {
-        HStack(spacing: 0) {
-            Text(".")
-                .font(.system(size: 13))
-                .foregroundColor(.secondary)
-                .padding(.leading, 7)
-            TextField("ts", text: $fileExtension)
-                .font(.system(size: 13, design: .monospaced))
-                .textFieldStyle(.plain)
-                .padding(.vertical, 4)
-                .padding(.trailing, 6)
-                .onChange(of: fileExtension) { newValue in
-                    if newValue.hasPrefix(".") {
-                        fileExtension = String(newValue.dropFirst())
+            // Initial content (collapsible)
+            VStack(alignment: .leading, spacing: 6) {
+                Button {
+                    withAnimation(.easeOut(duration: 0.15)) { showContent.toggle() }
+                } label: {
+                    HStack(spacing: 4) {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 9, weight: .heavy))
+                            .rotationEffect(.degrees(showContent ? 90 : 0))
+                            .foregroundColor(.secondary)
+                        Text("Initial content")
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundColor(.secondary)
+                        Text("· optional")
+                            .font(.system(size: 10))
+                            .foregroundColor(Color(NSColor.tertiaryLabelColor))
                     }
                 }
+                .buttonStyle(.plain)
+
+                if showContent {
+                    TextEditor(text: $content)
+                        .font(.system(size: 11, design: .monospaced))
+                        .frame(height: 72)
+                        .scrollContentBackground(.hidden)
+                        .background(Color(NSColor.textBackgroundColor))
+                        .overlay(RoundedRectangle(cornerRadius: 5)
+                            .stroke(Color(NSColor.separatorColor), lineWidth: 1))
+                        .cornerRadius(5)
+                        .transition(.opacity.combined(with: .move(edge: .top)))
+                }
+            }
         }
-        .background(Color(NSColor.textBackgroundColor))
-        .overlay(
-            RoundedRectangle(cornerRadius: 6)
-                .stroke(Color(NSColor.separatorColor), lineWidth: 1)
-        )
-        .cornerRadius(6)
+        .padding(14)
     }
 
-    // MARK: - Icon Picker
+    // MARK: Icon grid
 
-    private var iconPicker: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            fieldLabel("Icon")
-            LazyVGrid(
-                columns: Array(repeating: GridItem(.flexible(), spacing: 6), count: 8),
-                spacing: 6
-            ) {
-                ForEach(icons, id: \.self) { name in
-                    iconCell(name)
+    private let icons: [String] = [
+        "doc.text",   "doc.richtext",  "doc.fill",   "globe",
+        "paintpalette","curlybraces",   "terminal",   "swift",
+        "tablecells", "rectangle.on.rectangle", "cpu", "puzzlepiece",
+        "photo",      "music.note",    "chevron.left.forwardslash.chevron.right", "film",
+    ]
+
+    private var iconGrid: some View {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 5), count: 8), spacing: 5) {
+            ForEach(icons, id: \.self) { name in
+                Button { icon = name } label: {
+                    Image(systemName: name)
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundColor(icon == name ? .accentColor : .primary)
+                        .frame(width: 30, height: 28)
+                        .background(RoundedRectangle(cornerRadius: 6)
+                            .fill(icon == name
+                                  ? Color.accentColor.opacity(0.14)
+                                  : Color.secondary.opacity(0.08)))
+                        .overlay(RoundedRectangle(cornerRadius: 6)
+                            .stroke(icon == name ? Color.accentColor : Color.clear,
+                                    lineWidth: 1.5))
                 }
+                .buttonStyle(.plain)
             }
         }
     }
 
-    private func iconCell(_ name: String) -> some View {
-        let selected = selectedIcon == name
-        return Button { selectedIcon = name } label: {
-            Image(systemName: name)
-                .font(.system(size: 14, weight: .medium))
-                .foregroundColor(selected ? .accentColor : .primary)
-                .frame(width: 30, height: 30)
-                .background(
-                    RoundedRectangle(cornerRadius: 7)
-                        .fill(selected
-                              ? Color.accentColor.opacity(0.14)
-                              : Color.secondary.opacity(0.08))
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 7)
-                        .stroke(selected ? Color.accentColor : Color.clear, lineWidth: 1.5)
-                )
-        }
-        .buttonStyle(.plain)
-    }
+    // MARK: Footer
 
-    // MARK: - Initial Content
-
-    private var initialContentSection: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Button {
-                withAnimation(.easeOut(duration: 0.15)) {
-                    showInitialContent.toggle()
-                }
-            } label: {
-                HStack(spacing: 5) {
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 9, weight: .bold))
-                        .rotationEffect(.degrees(showInitialContent ? 90 : 0))
-                        .foregroundColor(.secondary)
-                    Text("Initial Content")
-                        .font(.system(size: 11, weight: .medium))
-                        .foregroundColor(.secondary)
-                    Text("optional")
-                        .font(.system(size: 10))
-                        .foregroundColor(Color(NSColor.tertiaryLabelColor))
-                }
-            }
-            .buttonStyle(.plain)
-
-            if showInitialContent {
-                TextEditor(text: $initialContent)
-                    .font(.system(size: 11, design: .monospaced))
-                    .frame(height: 88)
-                    .scrollContentBackground(.hidden)
-                    .background(Color(NSColor.textBackgroundColor))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 6)
-                            .stroke(Color(NSColor.separatorColor), lineWidth: 1)
-                    )
-                    .cornerRadius(6)
-                    .transition(.opacity.combined(with: .move(edge: .top)))
-            }
-        }
-    }
-
-    // MARK: - Footer
-
-    private var sheetFooter: some View {
+    private var footer: some View {
         HStack {
-            Button("Cancel") { dismiss() }
+            Button("Cancel", action: onBack)
                 .keyboardShortcut(.cancelAction)
+
             Spacer()
+
             Button("Add File Type") {
                 onAdd(FileTypeConfig(
-                    displayName: displayName.trimmingCharacters(in: .whitespaces),
-                    fileExtension: fileExtension
-                        .trimmingCharacters(in: .whitespaces)
-                        .lowercased(),
-                    systemIcon: selectedIcon,
+                    displayName: name.trimmingCharacters(in: .whitespaces),
+                    fileExtension: ext.trimmingCharacters(in: .whitespaces).lowercased(),
+                    systemIcon: icon,
                     isEnabled: true,
-                    initialContent: initialContent
+                    initialContent: content
                 ))
-                dismiss()
             }
             .keyboardShortcut(.defaultAction)
-            .disabled(!canAdd)
+            .disabled(!canSubmit)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 12)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 11)
     }
 
-    // MARK: - Helpers
+    // MARK: Helpers
 
-    private func fieldLabel(_ text: String) -> some View {
-        Text(text)
-            .font(.system(size: 11, weight: .medium))
-            .foregroundColor(.secondary)
+    @ViewBuilder
+    private func field<Content: View>(label: String, @ViewBuilder content: () -> Content) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(label)
+                .font(.system(size: 11, weight: .medium))
+                .foregroundColor(.secondary)
+            content()
+        }
     }
 }
