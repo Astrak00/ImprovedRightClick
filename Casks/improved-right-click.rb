@@ -1,16 +1,14 @@
 cask "improved-right-click" do
   version "1.0.0"
-  # Run `shasum -a 256 ImprovedRightClick-<version>.dmg` and paste here:
-  sha256 "REPLACE_WITH_SHA256_OF_DMG"
+  sha256 "657703524a2c22563b006e092ed1bd94841db59501204faeeb89915ab32ba457"
 
-  # Replace with the actual GitHub release URL after you publish it:
-  url "https://github.com/YOUR_GITHUB_USERNAME/improved-right-click/releases/download/v#{version}/ImprovedRightClick-#{version}.dmg"
-
+  url "https://github.com/Astrak00/ImprovedRightClick/releases/download/v#{version}/ImprovedRightClick-#{version}.dmg",
+      verified: "github.com/Astrak00/ImprovedRightClick/"
   name "Improved Right Click"
-  desc "Adds a 'New File' submenu to Finder's right-click context menu"
-  homepage "https://github.com/YOUR_GITHUB_USERNAME/improved-right-click"
+  desc "Bring the right click > create new file to Finder"
+  homepage "https://github.com/Astrak00/ImprovedRightClick"
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "ImprovedRightClick.app"
 

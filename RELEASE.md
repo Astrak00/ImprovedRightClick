@@ -20,7 +20,7 @@ gh repo create improved-right-click --public --source=. --remote=origin --push
 
 Or create it at github.com and add the remote manually:
 ```bash
-git remote add origin https://github.com/YOUR_USERNAME/improved-right-click.git
+git remote add origin https://github.com/Astrak00/ImprovedRightClick.git
 git push -u origin main
 ```
 

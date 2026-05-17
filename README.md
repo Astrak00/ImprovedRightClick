@@ -21,27 +21,24 @@ Adds a **New File** submenu and **New Folder Here** to Finder's right-click cont
 
 New files are named `untitled.ext` (or `untitled 2.ext` if one already exists), matching Finder's convention.
 
+## How to install it
+
+1. Download the DMG from the GitHub releases page
+2. Open the DMG and drag the app to Applications
+3. Remove the quarantine flag (one-time):
+   ```bash
+   xattr -dr com.apple.quarantine /Applications/ImprovedRightClick.app
+   ```
+4. Launch the app and enable the Finder extension when the banner appears
+
+
 ## Requirements
 
 - macOS 12 Monterey or later
 - Xcode 15+
-- [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`)
-- An Apple Developer account (free or paid) for code signing
+- [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`) _not available yet_
 
-## Build & install
 
-```bash
-# 1. Install XcodeGen if you don't have it
-brew install xcodegen
-
-# 2. Generate the Xcode project
-make generate
-
-# 3. Open in Xcode, set your Team in Signing & Capabilities, then run
-make open
-```
-
-> **Important:** Run the **ImprovedRightClick** scheme (not FinderSyncExtension directly). This installs the host app, which registers the extension.
 
 ## Enable the extension
 
@@ -63,22 +60,3 @@ FinderSyncExtension/         ← Finder Sync Extension (the actual menu)
   OfficeTemplates.swift      ← Minimal valid OOXML (docx/pptx/xlsx) builders
   MinimalZIPWriter.swift     ← Pure-Swift ZIP writer (no dependencies)
 ```
-
-### How it works
-
-- A **Finder Sync Extension** (`FIFinderSync` subclass) watches `/` so the menu appears in every Finder window.
-- On right-click, `menu(for:)` returns an `NSMenu` with a "New File" submenu and a "New Folder Here" item.
-- Text-based files are created from inline Swift string templates.
-- Office formats (`.docx`, `.pptx`, `.xlsx`) are minimal-but-valid OOXML ZIP packages, assembled at runtime by a dependency-free ZIP writer. They open without errors in Microsoft Office, LibreOffice, and Apple iWork.
-
-## Distribution (non-App Store)
-
-Build with `Release` configuration and sign with your **Developer ID Application** certificate. Users will need to allow the extension in System Settings the first time.
-
-## App Store distribution
-
-The `com.apple.security.temporary-exception.files.absolute-path.read-write` entitlement used by the extension is not allowed on the App Store. To distribute via the Mac App Store:
-
-1. Remove that entitlement.
-2. Use an **XPC service** inside the host app to perform file creation.
-3. The extension sends an XPC message with the target path; the host app service (which can have `com.apple.security.files.user-selected.read-write`) creates the file.
