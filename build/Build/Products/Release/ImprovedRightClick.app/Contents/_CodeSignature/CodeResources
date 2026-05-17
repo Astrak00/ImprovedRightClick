@@ -19,7 +19,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			DOfh+h+g0auYxffcjJAAv3HEPLs=
+			aUJfixukSNOyS5Z1rWedApmgMH0=
 			</data>
 			<key>requirement</key>
 			<string>identifier "com.improvedrightclick.app.FinderSyncExtension" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: iedualanav@gmail.com (NK36NGGB2V)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>

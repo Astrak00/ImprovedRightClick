@@ -91,10 +91,13 @@ class FinderSync: FIFinderSync {
 
     private func icon(_ name: String) -> NSImage? {
         guard let base = NSImage(systemSymbolName: name, accessibilityDescription: nil) else { return nil }
-        let config = NSImage.SymbolConfiguration(paletteColors: [.white])
-        let tinted = base.withSymbolConfiguration(config) ?? base
-        tinted.isTemplate = false
-        return tinted
+        let light = base.withSymbolConfiguration(.init(paletteColors: [.black])) ?? base
+        let dark  = base.withSymbolConfiguration(.init(paletteColors: [.white])) ?? base
+        return NSImage(size: base.size, flipped: false) { rect in
+            let isDark = NSAppearance.current.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+            (isDark ? dark : light).draw(in: rect)
+            return true
+        }
     }
 
     private func showError(_ message: String, detail: String) {
